@@ -3,6 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>Frank R. Haugen</Authors>
+    <Product>ChatApp</Product>
+    <Copyright>Frank R. Haugen</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/frankhaugen/dotnet-chat-app</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/frankhaugen/dotnet-chat-app</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
