@@ -2,9 +2,8 @@
 using ChatApp.Repositories.Sqlite;
 using LinqToDB;
 using System;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatApp.Repositories
 {
@@ -20,21 +19,17 @@ namespace ChatApp.Repositories
             CreateDatabase();
         }
 
-        public async Task<bool> CreateDatabase()
+        public void CreateDatabase()
         {
             using (var database = new Database())
             {
-                var schema = database.DataProvider.GetSchemaProvider().GetSchema(database);
-                var tableNames = schema.Tables.Select(tbl => tbl.TableName);
-                
                 try
                 {
                     database.CreateTable<ChatMessage>();
-                    return true;
                 }
                 catch (Exception e)
                 {
-                    return false;
+                    Trace.WriteLine(e);
                 }
             }
         }

@@ -6,12 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Database.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-preview6.19304.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ChatApp\ChatApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
