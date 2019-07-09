@@ -1,7 +1,9 @@
-﻿using System;
-using ChatApp.Repositories.Tsv;
+﻿using ChatApp.Repositories;
+using ChatApp.Repositories.Sqlite;
+using LinqToDB.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 namespace ChatApp.Cli
 {
     class Program
@@ -15,8 +17,12 @@ namespace ChatApp.Cli
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                     {
-                        services.AddTransient<ITsvRepository, TsvRepository>();
-                        services.AddTransient<ITsvStringGenerator, TsvStringGenerator>();
+                        DataConnection.DefaultSettings = new DatabaseSettings();
+
+                        services.AddTransient<IChatMessageRepository, ChatMessageRepository>();
+                        services.AddTransient<IDatabaseRepository, DatabaseRepository>();
+
+                        services.AddHostedService<AppRunner>();
                     });
     }
 }

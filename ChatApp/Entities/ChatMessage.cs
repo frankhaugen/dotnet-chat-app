@@ -1,12 +1,15 @@
 ﻿using System;
+using LinqToDB.Mapping;
 
 namespace ChatApp.Entities
 {
+    [Table(Name = "Messages")]
     public class ChatMessage
     {
-        public long Id { get; set; }
-        public DateTime Time { get; set; }
-        public string From { get; set; }
-        public string Message { get; set; }
+        [PrimaryKey, Identity]
+        public int Id { get; set; }
+        [Column] public DateTime Time { get; set; }
+        [Column] public string From { get; set; }
+        [Column] public string Message { get; set; }
     }
 }
