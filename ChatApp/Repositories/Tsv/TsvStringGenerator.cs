@@ -13,29 +13,13 @@ namespace ChatApp.Repositories.Tsv
         {
             var type = enumerable.FirstOrDefault().GetType();
 
-            if (type.GetDefaultMembers().Length > 1)
-            {
-                tsv.Add(string.Join("\t", type.GetProperties().Select(pi => pi.Name).ToArray()));
-                GetMultidimentionalRows(enumerable);
-            }
-            else if (type.GetDefaultMembers().Length == 1)
-            {
-                tsv.Add(type.Name);
-                GetOnedimentionalRows(enumerable);
-            }
-
+            tsv.Add(string.Join("\t", type.GetProperties().Select(pi => pi.Name).ToArray()));
+            GetRows(enumerable);
+            
             return string.Join("\n", tsv);
         }
 
-        private void GetOnedimentionalRows(IEnumerable<object> enumerable)
-        {
-            foreach (var obj in enumerable)
-            {
-                tsv.Add(obj.ToString());
-            }
-        }
-
-        private void GetMultidimentionalRows(IEnumerable<object> enumerable)
+        private void GetRows(IEnumerable<object> enumerable)
         {
             foreach (var obj in enumerable)
             {
@@ -53,11 +37,7 @@ namespace ChatApp.Repositories.Tsv
                     {
                         var cell = obj.GetType().GetProperty(property).GetValue(obj, null).ToString();
 
-                        //try
-                        //{
-                            cell = HttpUtility.HtmlDecode(cell);
-                        //}
-                        //catch (Exception e) { }
+                        cell = HttpUtility.HtmlDecode(cell);
 
                         row.Add(cell);
                     }
